@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Senin için 🌻</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to top, #fceabb, #f8b500);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    text-align: center;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+    align-items: center;
+    padding: 60px 40px 200px 40px;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+
+  #emoji {
+    font-size: 50px;
+    display: inline-block;
+    animation: spin 8s linear infinite;
+    margin-bottom: 15px;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    background: #ffeb3b;
+    color: black;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s ease;
+  }
+
+  button:hover {
+    background: #fdd835;
+  }
+
+  #text {
+    font-size: 20px;
+    font-weight: bold;
+    min-height: 30px;
+    transition: opacity 0.6s ease;
+  }
+
+  .sunflower {
+    width: 120px;        
+    height: 120px;       
+    margin: 120px auto 20px auto; /* yazının altına daha aşağıya kaydırıldı */
+    cursor: pointer;
+    display: none;
+    position: relative;
+  }
+
+  .petal {
+    position: absolute;
+    width: 40px;
+    height: 70px;
+    background: yellow;
+    border-radius: 25px 25px 0 0;
+    top: 0;
+    left: 50%;
+    transform-origin: bottom center;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    opacity: 1;
+    transition: transform 0.8s ease, opacity 0.8s ease;
+  }
+
+  .center {
+    position: absolute;
+    width: 60px;   
+    height: 60px;  
+    background: #f0f0f0; /* ortası hafif koyu */
+    border-radius: 50%;
+    top: 55%;  
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  }
+
+  .petal.fly {
+    transform: translateY(-200px) rotate(720deg);
+    opacity: 0;
+  }
+
+  #finalEmojis {
+    font-size: 40px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @media (max-width: 480px) {
+    .card {
+      padding: 40px 20px 180px 20px;
+    }
+    #emoji {
+      font-size: 40px;
+    }
+    h1 {
+      font-size: 1.3rem;
+    }
+    button {
+      font-size: 16px;
+      padding: 10px 20px;
+    }
+    .sunflower {
+      width: 100px;
+      height: 100px;
+      margin-top: 100px;
+    }
+    .petal {
+      width: 35px;
+      height: 60px;
+    }
+    .center {
+      width: 50px;
+      height: 50px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div id="emoji">🌻</div>
+  <h1>Ayçiçeği falına bakmak ister misin :)</h1>
+  <p id="text">Başlamak için tıkla!</p>
+  <button id="nextBtn">Tıkla</button>
+
+  <div class="sunflower" id="sunflower">
+    <div class="center"></div>
+  </div>
+
+  <div id="finalEmojis"></div>
+</div>
+
+<script>
+  const messages = [
+    "Avrupa Yakasının En İkonik İş Analisti!",
+    "Ayçiçeği sevdiğini söylemiştin...",
+    "Ben de dedim ki...",
+    "Belki seni biraz gülümsetirim ...",
+    "Çünkü seninle konuşmak...",
+    "Bugünlerde bana en keyif veren şey",
+    "Doğum gününü kutluyorum <333"
+  ];
+
+  const text = document.getElementById('text');
+  const nextBtn = document.getElementById('nextBtn');
+  const sunflower = document.getElementById('sunflower');
+  const finalEmojisDiv = document.getElementById('finalEmojis');
+
+  let messageIndex = 0;
+
+  const petals = [];
+  const totalPetals = 8;
+  let plucked = 0;
+  const petalResults = ["Seviyor", "Sevmiyor", "Seviyor", "Sevmiyor", "Seviyor", "Sevmiyor", "Seviyor"]; 
+  const finalEmojis = ["🎉", "💛", "💐", "🎉", "💛", "💐", "🎉", "🎉"];
+
+  for(let i=0; i<totalPetals; i++){
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+    const angle = i * (360 / totalPetals);
+    petal.style.transform = `rotate(${angle}deg) translateY(-70px)`;
+    sunflower.appendChild(petal);
+    petals.push(petal);
+  }
+
+  function nextMessage(){
+    if(messageIndex < messages.length){
+      text.style.opacity = 0;
+      setTimeout(() => {
+        text.innerText = messages[messageIndex];
+        text.style.opacity = 1;
+        messageIndex++;
+        if(messageIndex === messages.length){
+          sunflower.style.display = 'block';
+          nextBtn.style.display = 'none';
+          text.innerText = "Şimdi ayçiçeğine tıkla 🌻";
+        }
+      }, 400);
+    }
+  }
+
+  nextBtn.addEventListener('click', nextMessage);
+
+  function pluckPetal(){
+    if(plucked < petals.length){
+      const petal = petals[plucked];
+      petal.classList.add('fly');
+
+      text.style.opacity = 0;
+      setTimeout(() => {
+        if(plucked < petals.length -1){
+          text.innerText = petalResults[plucked]; // tek tek Seviyor/Sevmiyor
+        } else {
+          // son yaprakta sadece emoji göster
+          finalEmojisDiv.style.display = 'block';
+          finalEmojisDiv.innerText = finalEmojis.join(" ");
+          text.innerText = ""; // undefined çıkmasın
+        }
+        text.style.opacity = 1;
+      }, 400);
+
+      plucked++;
+    }
+  }
+
+  sunflower.addEventListener('click', pluckPetal);
+</script>
+
+</body>
+</html>
