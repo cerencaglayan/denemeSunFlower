@@ -27,7 +27,7 @@
     text-align: center;
     position: relative;
     align-items: center;
-    padding: 60px 40px 200px 40px;
+    padding: 50px 40px 100px 40px;
   }
 
   h1 {
@@ -140,33 +140,53 @@
   }
 
   @media (max-width: 480px) {
+    body {
+      padding-top: 12px;
+    }
     .card {
-      padding: 40px 20px 180px 20px;
+      width: 92%;
+      padding: 28px 16px 50px 16px;
+      border-radius: 14px;
     }
     #emoji {
-      font-size: 40px;
+      font-size: 34px;
+      margin-bottom: 8px;
     }
     h1 {
-      font-size: 1.3rem;
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+    }
+    #text {
+      font-size: 16px;
     }
     button {
-      font-size: 16px;
-      padding: 10px 20px;
+      font-size: 15px;
+      padding: 9px 18px;
+      margin-top: 14px;
     }
     .sunflower {
-      width: 160px;
-      height: 160px;
-      margin-top: 40px;
+      width: 150px;
+      height: 150px;
+      margin: 36px auto 16px auto;
     }
     .petal {
-      width: 30px;
-      height: 62px;
-      left: calc(50% - 15px);
-      transform-origin: 15px 80px;
+      width: 28px;
+      height: 58px;
+      left: calc(50% - 14px);
+      transform-origin: 14px 75px;
     }
     .center {
-      width: 55px;
-      height: 55px;
+      width: 50px;
+      height: 50px;
+    }
+    #centerText {
+      font-size: 8px;
+    }
+    #finalEmojis {
+      font-size: 30px;
+    }
+    #birthdayMsg {
+      font-size: 17px;
     }
   }
 </style>
@@ -177,7 +197,7 @@
 
 <div class="card">
   <div id="emoji">🌻</div>
-  <h1>Ayçiçeği falına bakmak ister misin :)</h1>
+  <h1> Süpriz! İzmir'den Oslo'ya bir teslimatınız var:)</h1>
   <p id="text">Başlamak için tıkla!</p>
   <button id="nextBtn">Tıkla</button>
 
