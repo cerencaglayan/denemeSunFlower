@@ -142,10 +142,11 @@
   @media (max-width: 480px) {
     body {
       padding-top: 12px;
+      align-items: flex-start;
     }
     .card {
       width: 92%;
-      padding: 28px 16px 50px 16px;
+      padding: 28px 16px 30px 16px;
       border-radius: 14px;
     }
     #emoji {
@@ -165,28 +166,30 @@
       margin-top: 14px;
     }
     .sunflower {
-      width: 150px;
-      height: 150px;
-      margin: 36px auto 16px auto;
+      width: 220px;
+      height: 220px;
+      margin: 30px auto 10px auto;
     }
     .petal {
-      width: 28px;
-      height: 58px;
-      left: calc(50% - 14px);
-      transform-origin: 14px 75px;
+      width: 38px;
+      height: 80px;
+      left: calc(50% - 19px);
+      transform-origin: 19px 110px;
     }
     .center {
-      width: 50px;
-      height: 50px;
+      width: 65px;
+      height: 65px;
     }
     #centerText {
-      font-size: 8px;
+      font-size: 9px;
     }
     #finalEmojis {
       font-size: 30px;
+      margin-top: 12px;
     }
     #birthdayMsg {
       font-size: 17px;
+      margin-top: 12px;
     }
   }
 </style>
@@ -197,7 +200,7 @@
 
 <div class="card">
   <div id="emoji">🌻</div>
-  <h1> Süpriz! İzmir'den Oslo'ya bir teslimatınız var:)</h1>
+  <h1> Süpriz! İzmir'den Oslo'ya bir mesajınız var:)</h1>
   <p id="text">Başlamak için tıkla!</p>
   <button id="nextBtn">Tıkla</button>
 
