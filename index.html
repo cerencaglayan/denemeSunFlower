@@ -145,6 +145,8 @@
 </head>
 <body>
 
+<audio id="bgMusic" src="video-games.mp3" loop></audio>
+
 <div class="card">
   <div id="emoji">🌻</div>
   <h1>Ayçiçeği falına bakmak ister misin :)</h1>
@@ -159,6 +161,11 @@
 </div>
 
 <script>
+  const music = document.getElementById('bgMusic');
+  music.play().catch(() => {
+    document.addEventListener('click', () => music.play(), { once: true });
+  });
+
   const messages = [
     "Avrupa Yakasının En İkonik İş Analisti!",
     "Ayçiçeği sevdiğini söylemiştin...",
