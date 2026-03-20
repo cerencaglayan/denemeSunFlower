@@ -51,7 +51,7 @@
     border-radius: 10px;
     cursor: pointer;
     font-size: 18px;
-    transition: background 0.3s ease;
+    transition: background 0.4s ease;
   }
 
   button:hover {
@@ -66,9 +66,9 @@
   }
 
   .sunflower {
-    width: 120px;        
-    height: 120px;       
-    margin: 120px auto 20px auto; /* yazının altına daha aşağıya kaydırıldı */
+    width: 200px;
+    height: 200px;
+    margin: 60px auto 20px auto;
     cursor: pointer;
     display: none;
     position: relative;
@@ -76,33 +76,28 @@
 
   .petal {
     position: absolute;
-    width: 40px;
-    height: 70px;
-    background: yellow;
-    border-radius: 25px 25px 0 0;
+    width: 36px;
+    height: 78px;
+    background: #ffe033;
+    border-radius: 50% 50% 20% 20%;
     top: 0;
-    left: 50%;
-    transform-origin: bottom center;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    opacity: 1;
+    left: calc(50% - 18px);
+    transform-origin: 18px 100px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     transition: transform 0.8s ease, opacity 0.8s ease;
   }
 
   .center {
     position: absolute;
-    width: 60px;   
-    height: 60px;  
-    background: #f0f0f0; /* ortası hafif koyu */
+    width: 65px;
+    height: 65px;
+    background: radial-gradient(circle, #2a1000, #6b3a00);
     border-radius: 50%;
-    top: 55%;  
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-  }
-
-  .petal.fly {
-    transform: translateY(-200px) rotate(720deg);
-    opacity: 0;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+    z-index: 2;
   }
 
   #finalEmojis {
@@ -131,17 +126,19 @@
       padding: 10px 20px;
     }
     .sunflower {
-      width: 100px;
-      height: 100px;
-      margin-top: 100px;
+      width: 160px;
+      height: 160px;
+      margin-top: 40px;
     }
     .petal {
-      width: 35px;
-      height: 60px;
+      width: 30px;
+      height: 62px;
+      left: calc(50% - 15px);
+      transform-origin: 15px 80px;
     }
     .center {
-      width: 50px;
-      height: 50px;
+      width: 55px;
+      height: 55px;
     }
   }
 </style>
@@ -180,16 +177,16 @@
   let messageIndex = 0;
 
   const petals = [];
-  const totalPetals = 8;
+  const totalPetals = 7;
   let plucked = 0;
   const petalResults = ["Seviyor", "Sevmiyor", "Seviyor", "Sevmiyor", "Seviyor", "Sevmiyor", "Seviyor"]; 
-  const finalEmojis = ["🎉", "💛", "💐", "🎉", "💛", "💐", "🎉", "🎉"];
+  const finalEmojis = ["🎉", "💛", "💐", "🎉", "💛", "💐", "🎉", "💛"];
 
   for(let i=0; i<totalPetals; i++){
     const petal = document.createElement('div');
     petal.classList.add('petal');
     const angle = i * (360 / totalPetals);
-    petal.style.transform = `rotate(${angle}deg) translateY(-70px)`;
+  petal.style.transform = `rotate(${angle}deg)`;
     sunflower.appendChild(petal);
     petals.push(petal);
   }
@@ -215,22 +212,31 @@
   function pluckPetal(){
     if(plucked < petals.length){
       const petal = petals[plucked];
-      petal.classList.add('fly');
+      const baseAngle = plucked * (360 / totalPetals);
+      petal.style.transform = `rotate(${baseAngle}deg) translateY(-200px)`;
+      petal.style.opacity = '0';
+
+      const currentIndex = plucked;
+      plucked++;
 
       text.style.opacity = 0;
+
       setTimeout(() => {
-        if(plucked < petals.length -1){
-          text.innerText = petalResults[plucked]; // tek tek Seviyor/Sevmiyor
-        } else {
-          // son yaprakta sadece emoji göster
-          finalEmojisDiv.style.display = 'block';
-          finalEmojisDiv.innerText = finalEmojis.join(" ");
-          text.innerText = ""; // undefined çıkmasın
+
+        if(currentIndex === petals.length - 1){
+          text.innerText = "Seviyor ❤️";
+
+          setTimeout(() => {
+            finalEmojisDiv.style.display = 'block';
+            finalEmojisDiv.innerText = finalEmojis.join(" ");
+          }, 800);
         }
+        else {
+          text.innerText = petalResults[currentIndex];
+        }
+
         text.style.opacity = 1;
       }, 400);
-
-      plucked++;
     }
   }
 
